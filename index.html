@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Password Leak Visualizer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <h1>Password Leak Visualizer</h1>
+    <p>Type a guess, see how many characters are correct, then run the attack to recover the key one character at a time.</p>
+  </header>
+
+  <main>
+
+    <!-- SECRET KEY -->
+    <section id="secret-key">
+      <button id="randomize-key" class="submitBtn">New secret key</button>
+    </section>
+
+    <!-- GUESS INPUT -->
+    <section id="guess">
+      <label>Your guess</label>
+      <div id="guess-boxes">
+        <input class="charBox" maxlength="1" data-pos="0">
+        <input class="charBox" maxlength="1" data-pos="1">
+        <input class="charBox" maxlength="1" data-pos="2">
+        <input class="charBox" maxlength="1" data-pos="3">
+        <input class="charBox" maxlength="1" data-pos="4">
+        <input class="charBox" maxlength="1" data-pos="5">
+      </div>
+      <button id="submit-guess" class="submitBtn">Submit guess</button>
+      <div id="guess-bar" class="resultBar">
+        <div class="bar-correct"></div>
+        <div class="bar-wrong"></div>
+      </div>
+    </section>
+
+    <!-- ATTACK WALKTHROUGH -->
+    <section id="attack">
+      <button id="attack-start" class="submitBtn attackBtn">Run attack</button>
+      <button id="attack-reset" class="submitBtn resetBtn">Reset</button>
+      <div id="attack-boxes">
+        <input class="charBox" maxlength="1" readonly>
+        <input class="charBox" maxlength="1" readonly>
+        <input class="charBox" maxlength="1" readonly>
+        <input class="charBox" maxlength="1" readonly>
+        <input class="charBox" maxlength="1" readonly>
+        <input class="charBox" maxlength="1" readonly>
+      </div>
+      <div id="attack-bar" class="resultBar">
+        <div class="bar-correct"></div>
+        <div class="bar-wrong"></div>
+      </div>
+      <div class="recoveredRow hidden">Recovered key: <span id="recovered-key"></span></div>
+    </section>
+
+    <!-- GUESS COUNTER -->
+    <section id="counter" class="hidden">
+      <div id="stats">
+        <div class="statTile">
+          <div class="statLabel">Guesses used by the attack</div>
+          <div class="statValue" id="leak-count"></div>
+        </div>
+        <div class="statTile">
+          <div class="statLabel">Guesses brute force would need</div>
+          <div class="statValue" id="bruteforce-count"></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
