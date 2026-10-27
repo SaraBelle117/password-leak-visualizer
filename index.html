@@ -10,38 +10,28 @@
 
   <header>
     <h1>Password Leak Visualizer</h1>
-    <p>Type a guess, see how many characters are correct, then run the attack to recover the key one character at a time.</p>
   </header>
 
   <main>
 
-    <!-- SECRET KEY -->
-    <section id="secret-key">
-      <button id="randomize-key" class="submitBtn">New secret key</button>
+    <!-- ============ LANDING ============ -->
+    <section id="landing">
+      <button type="button" id="go-versus" class="submitBtn">Versus</button>
+      <button type="button" id="go-attack" class="submitBtn">Attack only</button>
     </section>
 
-    <!-- GUESS INPUT -->
-    <section id="guess">
-      <label>Your guess</label>
-      <div id="guess-boxes">
-        <input class="charBox" maxlength="1" data-pos="0">
-        <input class="charBox" maxlength="1" data-pos="1">
-        <input class="charBox" maxlength="1" data-pos="2">
-        <input class="charBox" maxlength="1" data-pos="3">
-        <input class="charBox" maxlength="1" data-pos="4">
-        <input class="charBox" maxlength="1" data-pos="5">
+    <!-- ============ ATTACK ONLY ============ -->
+    <section id="mode-attack" class="hidden">
+      <div class="toolbar">
+        <button type="button" id="attack-back" class="submitBtn attackBtn">Back</button>
+        <button type="button" id="attack-start" class="submitBtn attackBtn">Run attack</button>
+        <div class="toolbar-right">
+          <button type="button" id="attack-reset" class="submitBtn resetBtn">Reset</button>
+          <label><input type="checkbox" id="attack-leak" checked> Leak enabled</label>
+        </div>
       </div>
-      <button id="submit-guess" class="submitBtn">Submit guess</button>
-      <div id="guess-bar" class="resultBar">
-        <div class="bar-correct"></div>
-        <div class="bar-wrong"></div>
-      </div>
-    </section>
 
-    <!-- ATTACK WALKTHROUGH -->
-    <section id="attack">
-      <button id="attack-start" class="submitBtn attackBtn">Run attack</button>
-      <button id="attack-reset" class="submitBtn resetBtn">Reset</button>
+      <label>Attacker</label>
       <div id="attack-boxes">
         <input class="charBox" maxlength="1" readonly>
         <input class="charBox" maxlength="1" readonly>
@@ -55,20 +45,74 @@
         <div class="bar-wrong"></div>
       </div>
       <div class="recoveredRow hidden">Recovered key: <span id="recovered-key"></span></div>
+
+      <section id="counter" class="hidden">
+        <div id="stats">
+          <div class="statTile">
+            <div class="statLabel">Guesses used by the attack</div>
+            <div class="statValue" id="leak-count"></div>
+          </div>
+          <div class="statTile">
+            <div class="statLabel">Guesses brute force would need</div>
+            <div class="statValue" id="bruteforce-count"></div>
+          </div>
+          <div class="statTile square">
+            <div class="statLabel">Time to recover (s)</div>
+            <div class="statValue" id="time-count"></div>
+          </div>
+        </div>
+      </section>
     </section>
 
-    <!-- GUESS COUNTER -->
-    <section id="counter" class="hidden">
-      <div id="stats">
-        <div class="statTile">
-          <div class="statLabel">Guesses used by the attack</div>
-          <div class="statValue" id="leak-count"></div>
-        </div>
-        <div class="statTile">
-          <div class="statLabel">Guesses brute force would need</div>
-          <div class="statValue" id="bruteforce-count"></div>
+    <!-- ============ VERSUS ============ -->
+    <section id="mode-versus" class="hidden">
+      <div class="toolbar">
+        <button type="button" id="versus-back" class="submitBtn attackBtn">Back</button>
+        <button type="button" id="versus-start" class="submitBtn attackBtn">Start race</button>
+        <div class="toolbar-right">
+          <button type="button" id="versus-reset" class="submitBtn resetBtn">Reset</button>
+          <label><input type="checkbox" id="versus-leak" checked> Leak enabled</label>
         </div>
       </div>
+
+      <div id="versus-arena">
+
+        <div id="versus-you">
+          <label>You</label>
+          <div id="your-boxes">
+            <input class="charBox" maxlength="1" data-pos="0">
+            <input class="charBox" maxlength="1" data-pos="1">
+            <input class="charBox" maxlength="1" data-pos="2">
+            <input class="charBox" maxlength="1" data-pos="3">
+            <input class="charBox" maxlength="1" data-pos="4">
+            <input class="charBox" maxlength="1" data-pos="5">
+          </div>
+          <div id="your-bar" class="resultBar">
+            <div class="bar-correct"></div>
+            <div class="bar-wrong"></div>
+          </div>
+          <button type="button" id="your-submit" class="submitBtn">Submit guess</button>
+        </div>
+
+        <div id="versus-attacker">
+          <label>Attacker</label>
+          <div id="versus-attack-boxes">
+            <input class="charBox" maxlength="1" readonly>
+            <input class="charBox" maxlength="1" readonly>
+            <input class="charBox" maxlength="1" readonly>
+            <input class="charBox" maxlength="1" readonly>
+            <input class="charBox" maxlength="1" readonly>
+            <input class="charBox" maxlength="1" readonly>
+          </div>
+          <div id="versus-attack-bar" class="resultBar">
+            <div class="bar-correct"></div>
+            <div class="bar-wrong"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <div id="winner" class="hidden"></div>
     </section>
 
   </main>

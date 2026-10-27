@@ -62,7 +62,7 @@ section {
     font-size: 1.5rem;
     padding: 8px 16px;
     border-radius: 12px;
-    margin: 0 8px;
+    margin: 10px 8px;
 }
 
 .submitBtn:hover {
@@ -141,4 +141,49 @@ section {
 
 #counter {
     margin-top: 48px;
+}
+
+.statTile.square {
+    width: 140px;
+    height: 140px;
+    box-sizing: border-box;
+    justify-content: center;
+}
+
+#attack-controls {
+    margin-bottom: 20px;
+}
+
+#versus-arena {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+}
+
+#versus-you,
+#versus-attacker {
+    padding: 0 40px;
+}
+
+#versus-attacker {
+    border-left: 1px solid #30363d;
+}
+
+#versus-arena label {
+    display: block;
+    margin: 12px 0 20px;
+}
+
+.toolbar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 30px;
+}
+
+.toolbar-right {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
