@@ -1,8 +1,17 @@
+:root {
+    color-scheme: dark;
+}
+
+html {
+    background-color: #0d1117;
+}
+
 body {
     background-color: #0d1117;
     color: #c9d1d9;
     font-family: Consolas, Menlo, "Courier New", monospace;
     margin: 0;
+    min-height: 100vh;
     padding: 40px 20px;
     text-align: center;
 }
@@ -62,7 +71,7 @@ section {
     font-size: 1.5rem;
     padding: 8px 16px;
     border-radius: 12px;
-    margin: 10px 8px;
+    margin: 15px 8px;
 }
 
 .submitBtn:hover {
@@ -111,7 +120,8 @@ section {
     display: none;
 }
 
-#stats {
+#stats,
+#versus-stats {
     display: flex;
     justify-content: center;
     gap: 16px;
@@ -121,6 +131,7 @@ section {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     gap: 8px;
     padding: 16px 24px;
     background-color: #161b22;
@@ -139,8 +150,79 @@ section {
     color: #e6edf3;
 }
 
-#counter {
+#counter,
+#versus-counter {
     margin-top: 48px;
+}
+
+.writeup {
+    max-width: 620px;
+    margin: 28px auto 0;
+    color: #8b949e;
+    line-height: 1.6;
+}
+
+#landing-intro {
+    max-width: 640px;
+    margin: 0 auto 40px;
+    color: #8b949e;
+    line-height: 1.6;
+}
+
+#mode-cards {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.mode-card {
+    width: 300px;
+    padding: 24px;
+    background-color: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 12px;
+}
+
+.mode-card h2 {
+    margin-top: 0;
+    color: #e6edf3;
+}
+
+.mode-card p {
+    color: #8b949e;
+    line-height: 1.6;
+}
+
+.alphabet {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.alphabet label {
+    cursor: pointer;
+    padding: 6px 12px;
+    border-radius: 999px;
+    border: 1px solid #30363d;
+    background: #161b22;
+    color: #8b949e;
+    user-select: none;
+}
+
+.alphabet label:has(input:checked) {
+    background: #238636;
+    border-color: #238636;
+    color: #ffffff;
+}
+
+.alphabet label:has(input:disabled) {
+    opacity: 0.5;
+    cursor: default;
+}
+
+.alphabet input {
+    display: none;
 }
 
 .statTile.square {
@@ -166,7 +248,11 @@ section {
 }
 
 #versus-attacker {
-    border-left: 1px solid #30363d;
+    border-left: 1px solid #000000;
+}
+
+#winner {
+    margin: 40px auto;
 }
 
 #versus-arena label {
@@ -179,6 +265,27 @@ section {
     align-items: center;
     gap: 12px;
     margin-bottom: 30px;
+    padding: 12px 0;
+    border-top: 1px solid #000000;
+    border-bottom: 1px solid #000000;
+    position: relative;
+}
+
+.toolbar-center {
+    position: static;
+    transform: none;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    row-gap: 8px;
+}
+
+.leak-control,
+.alphabet {
+    white-space: nowrap;
 }
 
 .toolbar-right {
@@ -186,4 +293,75 @@ section {
     display: flex;
     align-items: center;
     gap: 12px;
+}
+
+.toolbar label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+input[type="checkbox"] {
+    accent-color: #161b22;
+    margin: 0;
+    font: inherit;
+    width: 1.25em;
+    height: 1.25em;
+    border: 0.12em;
+    border-radius: 0.2em;
+    flex-shrink: 0;
+}
+
+input[type="checkbox"]:checked {
+    accent-color: white;
+}
+
+.leak-control {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.toolbar label.switch {
+    display: inline-block;
+    position: relative;
+    width: 46px;
+    height: 24px;
+    margin: 0;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    margin: 0;
+}
+
+.slider {
+    position: absolute;
+    inset: 0;
+    cursor: pointer;
+    background-color: #30363d;
+    border-radius: 24px;
+    transition: background-color 0.2s;
+}
+
+.slider::before {
+    content: "";
+    position: absolute;
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    transition: transform 0.2s;
+}
+
+.switch input:checked + .slider {
+    background-color: #238636;
+}
+
+.switch input:checked + .slider::before {
+    transform: translateX(22px);
 }

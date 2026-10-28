@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark">
   <title>Password Leak Visualizer</title>
   <link rel="stylesheet" href="style.css">
 </head>
@@ -16,18 +17,43 @@
 
     <!-- ============ LANDING ============ -->
     <section id="landing">
-      <button type="button" id="go-versus" class="submitBtn">Versus</button>
-      <button type="button" id="go-attack" class="submitBtn">Attack only</button>
+      <p id="landing-intro">A password checker that leaks how many characters you got right is enough to recover the whole key. Pick a mode:</p>
+      <div id="mode-cards">
+        <div class="mode-card">
+          <h2>Attack only</h2>
+          <p>Watch the attack recover a secret key one position at a time, using only the leaked count of correct characters. Flip the leak off to see it fall back to blind brute force.</p>
+          <button type="button" id="go-attack" class="submitBtn">Attack only</button>
+        </div>
+        <div class="mode-card">
+          <h2>Versus</h2>
+          <p>You and the attacker race for the same key. All you ever learn is how many characters are right, not which, so you're guessing while it works systematically.</p>
+          <button type="button" id="go-versus" class="submitBtn">Versus</button>
+        </div>
+      </div>
     </section>
 
     <!-- ============ ATTACK ONLY ============ -->
     <section id="mode-attack" class="hidden">
       <div class="toolbar">
         <button type="button" id="attack-back" class="submitBtn attackBtn">Back</button>
-        <button type="button" id="attack-start" class="submitBtn attackBtn">Run attack</button>
+        <div class="toolbar-center">
+          <button type="button" id="attack-start" class="submitBtn">&#9654; Run attack</button>
+          <span class="leak-control">
+            <label class="switch">
+              <input type="checkbox" id="attack-leak" checked>
+              <span class="slider"></span>
+            </label>
+            <span>Leak enabled</span>
+          </span>
+          <span class="alphabet">
+            <label><input type="checkbox" class="class-box" data-class="lower" checked> a-z</label>
+            <label><input type="checkbox" class="class-box" data-class="digit" checked> 0-9</label>
+            <label><input type="checkbox" class="class-box" data-class="upper"> A-Z</label>
+            <label><input type="checkbox" class="class-box" data-class="symbol"> !@#</label>
+          </span>
+        </div>
         <div class="toolbar-right">
           <button type="button" id="attack-reset" class="submitBtn resetBtn">Reset</button>
-          <label><input type="checkbox" id="attack-leak" checked> Leak enabled</label>
         </div>
       </div>
 
@@ -62,18 +88,36 @@
           </div>
         </div>
       </section>
+
+      <p id="attack-writeup" class="writeup hidden"></p>
     </section>
 
     <!-- ============ VERSUS ============ -->
     <section id="mode-versus" class="hidden">
       <div class="toolbar">
         <button type="button" id="versus-back" class="submitBtn attackBtn">Back</button>
-        <button type="button" id="versus-start" class="submitBtn attackBtn">Start race</button>
+        <div class="toolbar-center">
+          <button type="button" id="versus-start" class="submitBtn">&#9654; Start race</button>
+          <span class="leak-control">
+            <label class="switch">
+              <input type="checkbox" id="versus-leak" checked>
+              <span class="slider"></span>
+            </label>
+            <span>Leak enabled</span>
+          </span>
+          <span class="alphabet">
+            <label><input type="checkbox" class="class-box" data-class="lower" checked> a-z</label>
+            <label><input type="checkbox" class="class-box" data-class="digit" checked> 0-9</label>
+            <label><input type="checkbox" class="class-box" data-class="upper"> A-Z</label>
+            <label><input type="checkbox" class="class-box" data-class="symbol"> !@#</label>
+          </span>
+        </div>
         <div class="toolbar-right">
           <button type="button" id="versus-reset" class="submitBtn resetBtn">Reset</button>
-          <label><input type="checkbox" id="versus-leak" checked> Leak enabled</label>
         </div>
       </div>
+
+      <div id="guess-tally" class="hidden">You <span id="your-guess-count">0</span> &middot; Attacker <span id="attacker-guess-count">0</span></div>
 
       <div id="versus-arena">
 
@@ -108,11 +152,31 @@
             <div class="bar-correct"></div>
             <div class="bar-wrong"></div>
           </div>
+          <div class="recoveredRow hidden">Recovered key: <span id="versus-recovered-key"></span></div>
         </div>
 
       </div>
 
       <div id="winner" class="hidden"></div>
+
+      <p id="versus-writeup" class="writeup hidden"></p>
+
+      <section id="versus-counter" class="hidden">
+        <div id="versus-stats">
+          <div class="statTile">
+            <div class="statLabel">Guesses the attacker made</div>
+            <div class="statValue" id="versus-leak-count"></div>
+          </div>
+          <div class="statTile">
+            <div class="statLabel">Guesses brute force would need</div>
+            <div class="statValue" id="versus-bruteforce-count"></div>
+          </div>
+          <div class="statTile square">
+            <div class="statLabel">Time (s)</div>
+            <div class="statValue" id="versus-time-count"></div>
+          </div>
+        </div>
+      </section>
     </section>
 
   </main>
