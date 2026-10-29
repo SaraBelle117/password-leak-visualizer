@@ -288,6 +288,14 @@ section {
     white-space: nowrap;
 }
 
+.leak-control:has(input:disabled) {
+    opacity: 0.5;
+}
+
+.switch input:disabled + .slider {
+    cursor: default;
+}
+
 .toolbar-right {
     margin-left: auto;
     display: flex;

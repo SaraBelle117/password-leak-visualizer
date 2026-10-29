@@ -558,6 +558,8 @@ function setClassBoxesDisabled(disabled) {
   classBoxes.forEach(function (box) {
     box.disabled = disabled;
   });
+  document.getElementById("attack-leak").disabled = disabled;
+  document.getElementById("versus-leak").disabled = disabled;
 }
 
 function resetCurrentMode() {
